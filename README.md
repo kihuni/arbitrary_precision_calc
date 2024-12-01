@@ -1,123 +1,137 @@
 ## Arbitrary Precision Calculator
 
+### Project Overview
+
 The Arbitrary Precision Calculator is a Python-based computational tool designed to perform arithmetic and scientific operations with numbers of arbitrary size and precision. It supports operations in various bases (from binary to base-36), ensuring accurate calculations without being limited by standard data types. This calculator provides a modular and extensible framework suitable for advanced mathematical computations and is accessible through a command-line interface (REPL).
 
-## Components
+## Features
 
-1. ArbitraryPrecisionNumber
-This class represents numbers with arbitrary precision in a specified base. It handles initialization, validation, and parsing of input values.
+### Core Functionality
 
-## Key Features:
+- ArbitraryPrecisionNumber
+- Arbitrary precision integer arithmetic
+- Support for multiple numerical bases (2-36)
+- Basic operations:
 
-Supports integers, strings, and lists as input.
-Works with bases from 2 to 36.
-Internally represents numbers as a list of digits in reverse order for efficient arithmetic.
-Example Usage:
+    - Addition
+    - Subtraction
+    - Multiplication
+    - Division
+    - Modulo
+    - Exponentiation
+    - Factorial
 
-```
-num = ArbitraryPrecisionNumber("101", base=2)  # Represents binary 101 (5 in decimal)
+### Bonus Features
 
-```
+- Non-decimal base support
+- Fraction handling
+- Logarithmic operations
+- Scientific computational capabilities
 
-2. NumberOperations
+## Project Structure
    
-This class implements core arithmetic operations (addition and multiplication) for arbitrary precision numbers.
+```
+/arbitrary_precision_calc/
+│
+├── core/               # Core number representation and operations
+│   ├── number.py       # Arbitrary precision number class
+│   ├── operations.py   # Mathematical operations
+│   └── validators.py   # Input validation
+│
+├── utils/              # Utility modules
+│   ├── base_converter.py   # Base conversion utilities
+│   └── exceptions.py   # Custom exceptions
+│
+├── advanced/           # Advanced mathematical functions
+│   ├── scientific.py   # Advanced math operations
+│   └── performance.py  # Optimization techniques
+│
+├── interfaces/         # User interaction
+│   └── repl.py         # Interactive calculator interface
+│
+└── main.py             # Application entry point
+```
 
-## Key Features:
-
-- Ensures compatibility across bases.
-- Handles carry/borrow operations for addition.
-- Supports future extensibility for subtraction and division.
-  
-## Example Usage:
-
-- num1 = ArbitraryPrecisionNumber("101", base=2)
-- num2 = ArbitraryPrecisionNumber("11", base=2)
-- result = NumberOperations.add(num1, num2)  # Binary addition: 101 + 11 = 1000
-  
-1. BaseConverter
-   
-This utility class provides methods for converting numbers between bases.
-
-## Key Methods:
-
-- to_decimal: Converts a number from any base to decimal.
-- from_decimal: Converts a decimal number to any base.
-
-## Example Usage:
-
-- decimal = BaseConverter.to_decimal("101", from_base=2)  # Converts binary to decimal (5)
-- binary = BaseConverter.from_decimal(5, to_base=2)  # Converts decimal to binary ("101")
-  
-1. ScientificOperations
-   
-Implements advanced mathematical functions like power and factorial for arbitrary precision numbers.
-
-## Key Features:
-
-- Efficient binary exponentiation.
-- Factorial computation for very large numbers.
-  
-## Example Usage:
+### Installation:
 
 ```
-result = ScientificOperations.power(ArbitraryPrecisionNumber("2"), 10)  # 2^10 = 1024
-factorial_result = ScientificOperations.factorial(100)  # Computes 100!
+Prerequisites
 
-```
-1. CalculatorREPL
-   
-Provides an interactive command-line interface for the calculator.
-
-## Key Features:
-
-- Accepts mathematical expressions as input.
-- Handles errors gracefully.
-- Offers exit commands for user convenience.
-  
-## Example Usage:
-
-
->>> 2 ^ 10
-1024
->>> 100!
-93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
->>> exit
-
-1. ArbitraryPrecisionCalculator
-   
-The central class orchestrates operations and manages input preprocessing and evaluation.
-
-## Key Features:
-
-- Supports basic and scientific computations.
-- Parses and evaluates mathematical expressions securely.
-- Modular design for extensibility.
-- Example Usage:
-
-
-```
-calculator = ArbitraryPrecisionCalculator()
-result = calculator.evaluate("2 ^ 10 + 50!")
+Python 3.8+
+No external libraries required for core functionality
 
 ```
 
-Code Execution
-```
-Run the program using the command-line interface:
 
+## Setup:
+
+```
+git clone https://github.com/kihuni/arbitrary_precision_calc.git
+cd arbitrary-precision-calculator
+
+```
+  
+## Usage
+
+### Interactive REPL
+
+```
 python main.py
 
 ```
-This starts the REPL where users can perform calculations interactively.
 
-## Extensibility
+## Example Usage:
 
-This calculator is built with a modular architecture, allowing seamless addition of:
+```
+# Create numbers in different bases
+num1 = ArbitraryPrecisionNumber("1010", base=2)  # Binary
+num2 = ArbitraryPrecisionNumber("FF", base=16)  # Hexadecimal
 
-## New mathematical operations.
+# Perform operations
+result = num1.add(num2)
 
-- Support for additional bases.
-- Integration with external libraries for enhanced functionality.
+```
+
+## Advanced Features:
+
+### Base Conversion
+
+```
+# Convert between bases
+decimal_value = BaseConverter.to_decimal("1010", from_base=2)
+hex_value = BaseConverter.from_decimal(decimal_value, to_base=16)
+
+```
   
-With its robust design, the Arbitrary Precision Calculator serves as a reliable tool for both basic arithmetic and advanced computations.
+## Scientific Operations:
+
+```
+# Factorial of large numbers
+large_factorial = ScientificOperations.factorial(100)
+
+# Efficient exponentiation
+power_result = ScientificOperations.power(base=2, exponent=50)
+
+```
+## Supported Bases
+
+- Binary (base 2)
+- Octal (base 8)
+- Decimal (base 10)
+- Hexadecimal (base 16)
+- Custom bases up to base 36
+
+## Limitations
+
+- Current implementation focuses on integer calculations
+- Floating-point precision requires further development
+- Some advanced scientific functions are placeholders
+
+If you want to contribute:
+
+1. Fork the repository
+2. Create your feature branch (git checkout -b feature/AmazingFeature)
+3. Commit your changes (git commit -m 'Add some AmazingFeature')
+4. Push to the branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
+
