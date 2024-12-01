@@ -7,11 +7,14 @@ class CalculatorREPL:
         Interactive Read-Eval-Print Loop
         
         Features:
-        - Continuous input
+        - Multi-base support
+        - Scientific functions
         - Error handling
-        - Exit commands
         """
-        print("Arbitrary Precision Calculator")
+        print("Enhanced Arbitrary Precision Calculator")
+        print("Supported features:")
+        print("- Multi-base calculations")
+        print("- Scientific operations")
         print("Enter calculations. Type 'exit' to quit.")
         
         while True:

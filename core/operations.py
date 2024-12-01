@@ -1,4 +1,4 @@
-from core.number import ArbitraryPrecisionNumber
+from .number import ArbitraryPrecisionNumber
 
 class NumberOperations:
     @classmethod
@@ -47,8 +47,8 @@ class NumberOperations:
         
         Delegate to subtraction based on absolute values
         """
-        # Logic for mixed-sign addition
-        pass  # Implement detailed subtraction logic
+        # Placeholder for subtraction logic
+        raise NotImplementedError("Subtraction not yet implemented")
     
     @classmethod
     def multiply(cls, num1, num2):
@@ -59,5 +59,34 @@ class NumberOperations:
         - Handle sign
         - Efficient digit-wise multiplication
         """
-        # Implement multiplication logic
-        pass
+        # Ensure same base
+        if num1.base != num2.base:
+            raise ValueError("Cannot multiply numbers with different bases")
+        
+        # Determine sign
+        result_sign = num1.sign * num2.sign
+        
+        # Pad digits
+        max_len1, max_len2 = len(num1.digits), len(num2.digits)
+        result_digits = [0] * (max_len1 + max_len2)
+        
+        # Multiply each digit
+        for i, d1 in enumerate(num1.digits):
+            carry = 0
+            for j, d2 in enumerate(num2.digits):
+                product = d1 * d2 + result_digits[i+j] + carry
+                result_digits[i+j] = product % num1.base
+                carry = product // num1.base
+            
+            # Handle final carry
+            if carry:
+                result_digits[i + max_len2] += carry
+        
+        # Remove leading zeros
+        while result_digits and result_digits[-1] == 0:
+            result_digits.pop()
+        
+        # Create result number
+        result = ArbitraryPrecisionNumber(list(reversed(result_digits)), num1.base)
+        result.sign = result_sign
+        return result
